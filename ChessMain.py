@@ -47,13 +47,16 @@ def main():
                 row = location[1]//SQ_SIZE
                 if sqSelected == (row, col): #the user clicked a square twice
                     sqSelected = () #deselect
-                    playerClick = [] #clear player clicks
+                    playerClicks = [] #clear player clicks
                 else:
                     sqSelected = (row, col)
                     playerClicks.append(sqSelected) #append for both 1st and 2nd clicks
                 if len(playerClicks) == 2: #after 2nd click
-                    
-
+                    move = ChessEngine.Move(playerClicks[0], playerClicks[1], gs.board)
+                    print(move.getChessNotation())
+                    gs.makeMove(move)
+                    sqSelected = () #reset user clicks
+                    playerClicks = []
 
 
         drawGameState(screen, gs)
