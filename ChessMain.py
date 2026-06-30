@@ -3,7 +3,7 @@ This is our main driver file. It will be responsible for handling user input and
 """
 
 import pygame as p
-from Chess import ChessEngine #Go into a folder/package called Chess, and from there, import the file ChessEngine.py as a whole module.
+import ChessEngine 
 
 WIDTH = HEIGHT = 512
 DIMENSION = 8 #dimension of a chessboard is 8x8
@@ -50,10 +50,37 @@ def drawGameState(screen, gs):
     drawBoard(screen) #draw squares on the board
     drawPieces(screen, gs.board) #draw pieces on top of those squares
 
+"""
+Draw the squares on the board. We need to draw the screen before the pieces.
+The top left square is always light. It is true from both perspectives.
 
+if (r + c) % 2 == 0:
+    color = colors[0]
+else:
+    color = colors[1]
+Chess boards alternate colors based on whether the sum of the row and column is even or odd: 
+square (0,0) → sum is 0 → even → color index 0 
+Square (0,1) → sum is 1 → odd → color index 1
+
+
+for example, when r=2 and c=3, you get p.Rect(192, 128, 64, 64) — a 64x64 square starting 192 pixels from the left and 128 pixels from the top. 
+Multiply that by all 64 combinations of r and c in the nested loop, and you get every square of the board positioned correctly
+
+"""
 def drawBoard(screen):
+    colors = [p.Color("white"), p.Color("gray")]
+    for r in range (DIMENSION):
+        for c in range (DIMENSION):
+            color = colors[(r+c) % 2]
+            p.draw.rect(screen, color, p.Rect(c*SQ_SIZE, r*SQ_SIZE, SQ_SIZE, SQ_SIZE))
 
+
+
+"""
+Draw the pieces on the board. Using the current GameState.board
+"""
 def drawPieces(screen, board):
+    pass
 
 if __name__ == "__main__":
     main()
