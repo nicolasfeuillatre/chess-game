@@ -36,12 +36,12 @@ def main():
     loadImages() #Do this once, before the while loop
     running = True
     sqSelected = () #no square is select initially (tuple: (row, col))
-    playerClick = [] #keep track of player clicks (two tuples : [(6, 4), (4,4)])
+    playerClicks = [] #keep track of player clicks (two tuples : [(6, 4), (4,4)])
     while running:
         for e in p.event.get(): #p.event.get collects everything that happens — every key press, mouse click, window close button click — into a list of "events."
             if e.type == p.QUIT: #is the current event specifically a request to quit?
                 running = False 
-            elif e.rtpe == p.MOUSEBUTTONDOWN:
+            elif e.type == p.MOUSEBUTTONDOWN:
                 location = p.mouse.get_pos() #(x, y) = loc of the mouse
                 col = location[0]//SQ_SIZE
                 row = location[1]//SQ_SIZE
@@ -49,7 +49,12 @@ def main():
                     sqSelected = () #deselect
                     playerClick = [] #clear player clicks
                 else:
+                    sqSelected = (row, col)
+                    playerClicks.append(sqSelected) #append for both 1st and 2nd clicks
+                if len(playerClicks) == 2: #after 2nd click
                     
+
+
 
         drawGameState(screen, gs)
         clock.tick(MAX_FPS) #Uses the Clock object to pause the loop just enough so it doesn't run faster than MAX_FPS
