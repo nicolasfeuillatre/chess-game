@@ -39,11 +39,21 @@ def main():
         for e in p.event.get(): #p.event.get collects everything that happens — every key press, mouse click, window close button click — into a list of "events."
             if e.type == p.QUIT: #is the current event specifically a request to quit?
                 running = False 
-        
+        drawGameState(screen, gs)
         clock.tick(MAX_FPS) #Uses the Clock object to pause the loop just enough so it doesn't run faster than MAX_FPS
         p.display.flip() #p.display.flip() is what actually pushes everything you've drawn onto the visible window
 
+"""
+Responsible for all the graphics within a current game
+"""
+def drawGameState(screen, gs):
+    drawBoard(screen) #draw squares on the board
+    drawPieces(screen, gs.board) #draw pieces on top of those squares
 
+
+def drawBoard(screen):
+
+def drawPieces(screen, board):
 
 if __name__ == "__main__":
     main()
