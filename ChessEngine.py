@@ -23,6 +23,12 @@ class Gamestate():
         self.whiteToMove = True
         self.moveLog = []
 
+    def makeMove(self, move):
+        self.board[move.startRow][move.startCol] = "--"
+        self.board[move.endRow][move.endCol] = move.pieceMoved
+        self.moveLog.append(move) #log the move so we can undo it later
+        self.whiteToMove = not self.whiteToMove #swap players
+
 
 class Move():
     # maps kets to values
@@ -48,11 +54,13 @@ class Move():
         self.pieceMoved = board[self.startRow][self.startCol]
         self.pieceCaptured = board[self.endRow][self.endCol]
 
+    def getRankFile(self, r, c):
+        return self.colsToFiles[c] + self.rowsToRanks[r]
+
 
     def getChessNotation(self):
         return self.getRankFile(self.startRow, self.startCol) + self.getRankFile(self.endRow, self.endCol)
 
     
-    def getRankFile(self, r, c):
-        return self.colsToFiles[c] + self.rowsToRanks[r]
+
     
