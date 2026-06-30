@@ -35,10 +35,22 @@ def main():
     gs = ChessEngine.Gamestate() #gs = ChessEngine.Gamestate() creates an actual instance of your GameState class
     loadImages() #Do this once, before the while loop
     running = True
+    sqSelected = () #no square is select initially (tuple: (row, col))
+    playerClick = [] #keep track of player clicks (two tuples : [(6, 4), (4,4)])
     while running:
         for e in p.event.get(): #p.event.get collects everything that happens — every key press, mouse click, window close button click — into a list of "events."
             if e.type == p.QUIT: #is the current event specifically a request to quit?
                 running = False 
+            elif e.rtpe == p.MOUSEBUTTONDOWN:
+                location = p.mouse.get_pos() #(x, y) = loc of the mouse
+                col = location[0]//SQ_SIZE
+                row = location[1]//SQ_SIZE
+                if sqSelected == (row, col): #the user clicked a square twice
+                    sqSelected = () #deselect
+                    playerClick = [] #clear player clicks
+                else:
+                    
+
         drawGameState(screen, gs)
         clock.tick(MAX_FPS) #Uses the Clock object to pause the loop just enough so it doesn't run faster than MAX_FPS
         p.display.flip() #p.display.flip() is what actually pushes everything you've drawn onto the visible window
