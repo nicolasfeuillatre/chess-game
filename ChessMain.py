@@ -41,6 +41,7 @@ def main():
         for e in p.event.get(): #p.event.get collects everything that happens — every key press, mouse click, window close button click — into a list of "events."
             if e.type == p.QUIT: #is the current event specifically a request to quit?
                 running = False 
+            #mouse handler
             elif e.type == p.MOUSEBUTTONDOWN:
                 location = p.mouse.get_pos() #(x, y) = loc of the mouse
                 col = location[0]//SQ_SIZE
@@ -57,7 +58,10 @@ def main():
                     gs.makeMove(move)
                     sqSelected = () #reset user clicks
                     playerClicks = []
-
+            #key handlers
+            elif e.type == p.KEYDOWN:
+                if e.key == p.K_z: #undo when 'z' is pressed
+                    gs.undoMove()
 
         drawGameState(screen, gs)
         clock.tick(MAX_FPS) #Uses the Clock object to pause the loop just enough so it doesn't run faster than MAX_FPS
