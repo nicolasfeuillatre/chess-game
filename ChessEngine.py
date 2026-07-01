@@ -127,15 +127,37 @@ class Gamestate():
     Get all the knight moves for the knights, and add those moves to the list
     """
     def getKnightMoves(self, r, c, moves):
-        pass
+        directions = [(1, 2), (1, -2), (-1, -2), (-1, 2), (2, 1), (2, -1), (-2, -1), (-2, 1)]
+        current_player = "w" if self.whiteToMove else "b"
+        for direction in directions:
+            if (0 <= r + direction[0] <= 7) and (0 <= c + direction[1] <= 7):
+                if self.board[r + direction[0]][c + direction[1]] == "--":
+                    moves.append(Move((r,c), (r + direction[0], c + direction[1]), self.board))
+                elif self.board[r + direction[0]][c + direction[1]][0] != current_player:
+                    moves.append(Move((r,c), (r + direction[0], c + direction[1]), self.board))
+                
 
     """
     Get all the bishop moves for the bishops, and add those moves to the list
     """
     def getBishopMoves(self, r, c, moves):
-        pass
-
-    """
+        directions = [(1, 1), (1, -1), (-1, 1), (-1, -1)]
+        current_player = "w" if self.whiteToMove else "b"
+        for dr, dc in directions:
+            endRow, endCol = r + dr, c + dc
+            for i in range(len(self.board)):
+                if (0 <= endRow <= 7) and (0 <= endCol <= 7):
+                    if self.board[endRow][endCol] == "--":
+                        moves.append(Move((r, c), (endRow, endCol), self.board))
+                    elif self.board[endRow][endCol][0] != current_player:
+                        moves.append(Move((r, c), (endRow, endCol), self.board))
+                        break
+                    else:
+                        break
+                endRow += dr
+                endCol += dc
+    
+    """""
     Get all the queen moves for the queen, and add those moves to the list
     """
     def getQueenMoves(self, r, c, moves):
