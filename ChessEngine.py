@@ -87,11 +87,42 @@ class Gamestate():
                  moves.append(Move((r, c), (r+1,c+1), self.board))
 
     """
-    Get all the rook moves for the pawns, and add those moves to the list
+    Get all the rook moves for the rooks, and add those moves to the list
     """
     def getRookMoves(self, r, c, moves):
-        pass
-
+        current_player = 'w' if self.whiteToMove else 'b'
+        for i in range(1, 8-r): #vertical upward movement
+            if self.board[r+i][c] == "--":
+                moves.append(Move((r, c), (r+i,c), self.board))
+            elif self.board[r+i][c][0] != current_player:
+                moves.append(Move((r, c), (r+i,c), self.board))
+                break
+            else:
+                break
+        for i in range(1, r+1): #vertical downward movement
+            if self.board[r-i][c] == "--":
+                moves.append(Move((r, c), (r-i,c), self.board))
+            elif self.board[r-i][c][0] != current_player:
+                moves.append(Move((r, c), (r-i,c), self.board))
+                break
+            else:
+                break
+        for i in range(1, 8-c): #horizontal rightward movement
+            if self.board[r][c+i] == "--":
+                moves.append(Move((r, c), (r,c+i), self.board))
+            elif self.board[r][c+i][0] != current_player:
+                moves.append(Move((r, c), (r,c+i), self.board))
+                break
+            else:
+                break
+        for i in range(1, c+1): #horizontal leftward movement
+            if self.board[r][c-i] == "--":
+                moves.append(Move((r, c), (r,c-i), self.board))
+            elif self.board[r][c-i][0] != current_player:
+                moves.append(Move((r, c), (r,c-i), self.board))
+                break
+            else:
+                break
     """
     Get all the knight moves for the knights, and add those moves to the list
     """
