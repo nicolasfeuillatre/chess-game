@@ -161,8 +161,9 @@ class Gamestate():
     Get all the queen moves for the queen, and add those moves to the list
     """
     def getQueenMoves(self, r, c, moves):
-        pass
-
+        self.getRookMoves(self, r, c, moves)
+        self.getBishopMoves(self, r, c, moves)
+    
     """
     Get all the king moves for the king, and add those moves to the list
     """
