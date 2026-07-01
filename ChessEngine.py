@@ -60,10 +60,7 @@ class Gamestate():
                 turn = self.board[r][c][0] #Index [0] grabs the first character (the color). So turn is either 'w', 'b', or '-'
                 if (turn == 'w' and self.whiteToMove) or (turn == 'b' and not self.whiteToMove):
                     piece = self.board[r][c][1] #Index [1] grabs the type of the piece
-                    if piece == 'p':
-                        self.getPawnMoves(r, c, moves)
-                    elif piece == 'R':
-                        self.getRookMoves(r, c, moves)
+                    self.moveFunctions[piece](r,c, moves) #calls the appropriate move function, based on piece type
         return moves
     """
     Get all the pawn moves for the pawns, and add those moves to the list
@@ -93,6 +90,30 @@ class Gamestate():
     Get all the rook moves for the pawns, and add those moves to the list
     """
     def getRookMoves(self, r, c, moves):
+        pass
+
+    """
+    Get all the knight moves for the knights, and add those moves to the list
+    """
+    def getKnightMoves(self, r, c, moves):
+        pass
+
+    """
+    Get all the bishop moves for the bishops, and add those moves to the list
+    """
+    def getBishopMoves(self, r, c, moves):
+        pass
+
+    """
+    Get all the queen moves for the queen, and add those moves to the list
+    """
+    def getQueenMoves(self, r, c, moves):
+        pass
+
+    """
+    Get all the king moves for the king, and add those moves to the list
+    """
+    def getKingMoves(self, r, c, moves):
         pass
 
 
