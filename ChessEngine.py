@@ -59,7 +59,7 @@ class Gamestate():
                 if (turn == 'w' and self.whiteToMove) or (turn == 'b' and not self.whiteToMove):
                     piece = self.board[r][c][1] #Index [1] grabs the type of the piece
                     if piece == 'p':
-                        self.getPawnMoves(r,c , moves)
+                        self.getPawnMoves(r, c, moves)
                     elif piece == 'R':
                         self.getRookMoves(r, c, moves)
         return moves
@@ -69,9 +69,16 @@ class Gamestate():
     def getPawnMoves(self, r, c, moves):
         if self.whiteToMove: #white pawn moves
             if self.board[r-1][c] == "--": #1 square pawn advance
-                moves.append(Move((r, c)(r-1, c), self.board))
+                moves.append(Move((r, c),(r-1, c), self.board))
                 if r ==6 and self.board[r-2][c] == "--": #2 square pawn advance
-                    moves.append(Move(r,c), (r-2, c), self.board)
+                    moves.append(Move((r,c), (r-2, c), self.board))
+            if c-1 >= 0 and self.board[r-1][c-1][0] == 'b': #enemy piece to capture to the left
+                moves.append(Move((r, c),(r-1, c-1), self.board))
+            if c+1 <= 7 and self.board[r-1][c+1][0] == 'b': #enemy piece to capture to the right
+                moves.append(Move((r, c),(r-1, c+1), self.board))
+       
+
+
     """
     Get all the rook moves for the pawns, and add those moves to the list
     """
