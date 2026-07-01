@@ -62,7 +62,7 @@ class Gamestate():
                         self.getPawnMoves(r,c , moves)
                     elif piece == 'R':
                         self.getRookMoves(r, c, moves)
-
+        return moves
     """
     Get all the pawn moves for the pawns, and add those moves to the list
     """
