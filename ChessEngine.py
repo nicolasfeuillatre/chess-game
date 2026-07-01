@@ -20,6 +20,8 @@ class Gamestate():
              ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
              ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]] #White pieces
         
+        self.moveFunctions = {'p': self.getPawnMoves,'R': self.getRookMoves,'N': self.getKnightMoves,'B': self.getBishopMoves,'Q': self.getQueenMoves,'K': self.getKingMoves}
+
         self.whiteToMove = True
         self.moveLog = []
 
@@ -70,7 +72,7 @@ class Gamestate():
         if self.whiteToMove: #white pawn moves
             if self.board[r-1][c] == "--": #1 square pawn advance
                 moves.append(Move((r, c),(r-1, c), self.board))
-                if r ==6 and self.board[r-2][c] == "--": #2 square pawn advance
+                if r == 6 and self.board[r-2][c] == "--": #2 square pawn advance
                     moves.append(Move((r,c), (r-2, c), self.board))
             if c-1 >= 0 and self.board[r-1][c-1][0] == 'b': #enemy piece to capture to the left
                 moves.append(Move((r, c),(r-1, c-1), self.board))
@@ -80,12 +82,12 @@ class Gamestate():
         if not self.whiteToMove: #black pawn moves
             if self.board[r+1][c] == "--": #1 square pawn advance
                 moves.append(Move((r, c), (r+1,c), self.board)) 
-                if r == 2 and self.board[r+2][c] == "--": #2 square pawn advance
+                if r == 1 and self.board[r+2][c] == "--": #2 square pawn advance
                     moves.append(Move((r, c), (r+2,c), self.board))
-            if c-1 >= 0 and self.board[r-1][c-1][0] == "w": #enemy piece to capture to the left
+            if c-1 >= 0 and self.board[r+1][c-1][0] == "w": #enemy piece to capture to the left
                  moves.append(Move((r, c), (r+1,c-1), self.board))
-            if c+1 <= 7 and self.board[r-1][c+1][0] == "w": #enemy piece to capture to the left
-                 moves.append(Move((r, c), (r-1,c+1), self.board))
+            if c+1 <= 7 and self.board[r+1][c+1][0] == "w": #enemy piece to capture to the left
+                 moves.append(Move((r, c), (r+1,c+1), self.board))
 
     """
     Get all the rook moves for the pawns, and add those moves to the list
