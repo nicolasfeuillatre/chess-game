@@ -67,8 +67,11 @@ class Gamestate():
     Get all the pawn moves for the pawns, and add those moves to the list
     """
     def getPawnMoves(self, r, c, moves):
-        pass
-
+        if self.whiteToMove: #white pawn moves
+            if self.board[r-1][c] == "--": #1 square pawn advance
+                moves.append(Move((r, c)(r-1, c), self.board))
+                if r ==6 and self.board[r-2][c] == "--": #2 square pawn advance
+                    moves.append(Move(r,c), (r-2, c), self.board)
     """
     Get all the rook moves for the pawns, and add those moves to the list
     """
@@ -103,6 +106,7 @@ class Move():
 
     """
     Overriding the equals method
+    overrides == to compare moveIDs instead of memory addresses
     """
     def __eq__(self, other):
         if isinstance(other, Move):
