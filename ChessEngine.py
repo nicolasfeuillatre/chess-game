@@ -157,18 +157,28 @@ class Gamestate():
                 endRow += dr
                 endCol += dc
     
-    """""
+    """"
     Get all the queen moves for the queen, and add those moves to the list
     """
     def getQueenMoves(self, r, c, moves):
-        self.getRookMoves(self, r, c, moves)
-        self.getBishopMoves(self, r, c, moves)
+        self.getRookMoves(r, c, moves)
+        self.getBishopMoves(r, c, moves)
     
     """
     Get all the king moves for the king, and add those moves to the list
     """
     def getKingMoves(self, r, c, moves):
-        pass
+        current_player = "w" if self.whiteToMove else "b"
+        for row in [-1, 0, 1]:
+            for col in [-1, 0, 1]:
+                if (0 <= r + row <= 7) and (0 <= c + col <= 7):
+                    if self.board[r + row][c + col] == "--":
+                        moves.append(Move((r, c), (r + row, c + col), self.board))
+                    elif self.board[r + row][c + col][0] != current_player:
+                        moves.append(Move((r, c), (r + row, c + col), self.board))
+                    
+                
+
 
 
 class Move():
