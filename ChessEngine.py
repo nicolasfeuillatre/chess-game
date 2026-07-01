@@ -42,6 +42,18 @@ class Gamestate():
             self.board[move.endRow][move.endCol] = move.pieceCaptured
             self.whiteToMove = not self.whiteToMove #switch turns back
 
+    """
+    All moves considering checks
+    """
+    def getValidMoves(self):
+        pass
+
+    """
+    All moves without considering checks
+    """
+    def getAllPossibleMoves(self):
+        pass
+
 
 class Move():
     # maps kets to values
