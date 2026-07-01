@@ -33,6 +33,10 @@ def main():
     clock = p.time.Clock() #This creates a Clock object, which pygame uses to control timing
     screen.fill(p.Color("white")) #This fills the entire window with a solid color — here, white
     gs = ChessEngine.Gamestate() #gs = ChessEngine.Gamestate() creates an actual instance of your GameState class
+    validMoves = gs.getValidMoves()
+    moveMade = False #flag variable for when a move is made
+    #recalculate valid moves only when something actually changed, not every frame
+    
     loadImages() #Do this once, before the while loop
     running = True
     sqSelected = () #no square is select initially (tuple: (row, col))
